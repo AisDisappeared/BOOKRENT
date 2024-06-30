@@ -3,6 +3,10 @@ from django.db import models
 from publishers.models import Publisher 
 from authors.models import Author
 from django.utils.text import slugify
+import uuid 
+
+
+
 
 class BookTitle(models.Model):
     title = models.CharField(max_length=255,unique=True)
@@ -17,6 +21,7 @@ class BookTitle(models.Model):
         if not self.slug:
             # Generate a slug 
             self.slug = slugify(self.title)
+
         super().save(*args, **kwargs)
 
 
@@ -31,7 +36,15 @@ class Book(models.Model):
     book_id = models.CharField(max_length=255,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =  models.DateTimeField(auto_now=True)
-    # Qr_code 
+    Qr_code = models.ImageField(upload_to='Qr_codes/',blank=True,null=True)
+
+    def save(self, *args, **kwargs):
+        if not self.book_id:
+            self.book_id = str(uuid.uuid4).replace('-','')[:24].lower()
+
+        # Generate one
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
         return f"{self.book_title}"
