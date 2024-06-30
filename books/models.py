@@ -5,6 +5,11 @@ from authors.models import Author
 from django.utils.text import slugify
 import uuid 
 
+# Packages that we have to import to generate Qrcode
+import qrcode 
+from io import BytesIO 
+from PIL import Image
+from django.core.files import File 
 
 
 
@@ -43,6 +48,16 @@ class Book(models.Model):
             self.book_id = str(uuid.uuid4).replace('-','')[:24].lower()
 
         # Generate one
+        qrcode_image = qrcode.make(self.book_id)
+        canvas = Image.new('RGB',(qrcode_image.pixel_size,qrcode_image.pixel_size),'white')
+        canvas.paste(qrcode_image)
+        fname = f"qr_code={self.book_title}.png"
+        buffer = BytesIO()
+        canvas.save(buffer,'PNG')
+        self.Qr_code.save(fname, File(buffer),save=False)
+        canvas.close()
+
+        
         super().save(*args, **kwargs)
 
 

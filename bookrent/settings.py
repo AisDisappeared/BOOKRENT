@@ -47,7 +47,7 @@ INSTALLED_APPS = [
 
     # 3rd Party apps 
     'django_countries',
-]
+ ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
