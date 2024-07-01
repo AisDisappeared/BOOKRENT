@@ -16,12 +16,12 @@ class Customer(models.Model):
     def save(self , *args, **kwargs):
         if not self.username:
             username = slugify(f"{self.first_name} {self.last_name}")
-            ex = __class__.objects.fitler(username=username).exit()
+            ex = __class__.objects.filter(username=username).exists()
             
             while ex:
                 i = len(__class__.objects.filter(first_name=self.first_name,last_name=self.last_name))
                 username = slugify(f"{self.first_name} {self.last_name} {i+1}")
-                ex = __class__.objects.fitler(username=username).exit()
+                ex = __class__.objects.filter(username=username).exists()
 
             self.username = username
 
