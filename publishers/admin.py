@@ -1,8 +1,20 @@
 from django.contrib import admin
 from .models import Publisher 
+from import_export import resources 
+from import_export.admin import ExportActionMixin 
+from import_export.fields import Field
 
 
-class PublisherAdmin(admin.ModelAdmin):
+class PublisherResource(resources.ModelResource):
+    class Meta:
+        fields = ['id','name','country','created_at']
+        model = Publisher
+
+    # def dehydrate_created_at(self , obj):
+    #     return obj.created_at.strftime('%d/%m/%y')
+    
+
+class PublisherAdmin(ExportActionMixin,admin.ModelAdmin):
     list_display = ['name','country']
     list_filter = ['name','country']
     date_hierarchy = ('created_at')
@@ -10,5 +22,7 @@ class PublisherAdmin(admin.ModelAdmin):
     save_as = True
     save_on_top = True 
     search_help_text = f'search in: {". ".join(search_fields)}'
+    resource_class = PublisherResource
+
 
 admin.site.register(Publisher,PublisherAdmin)
