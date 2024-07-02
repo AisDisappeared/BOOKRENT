@@ -21,6 +21,7 @@ class BookTitle(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
     # save method for generating slug field .... even an object from booktitle model doesn't have slug .
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -42,6 +43,7 @@ class Book(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =  models.DateTimeField(auto_now=True)
     Qr_code = models.ImageField(upload_to='Qr_codes/',blank=True,null=True)
+
 
     def save(self, *args, **kwargs):
         if not self.book_id:
