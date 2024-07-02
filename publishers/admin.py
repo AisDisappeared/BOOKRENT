@@ -6,12 +6,15 @@ from import_export.fields import Field
 
 
 class PublisherResource(resources.ModelResource):
+    created_at = Field()
     class Meta:
         fields = ['id','name','country','created_at']
         model = Publisher
+        export_order = fields 
 
-    # def dehydrate_created_at(self , obj):
-    #     return obj.created_at.strftime('%d/%m/%y')
+
+    def dehydrate_created_at(self , obj):
+        return obj.created_at.strftime('%d/%m/%y')
     
 
 class PublisherAdmin(ExportActionMixin,admin.ModelAdmin):
