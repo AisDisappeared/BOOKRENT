@@ -48,10 +48,25 @@ INSTALLED_APPS = [
     # 3rd Party apps 
     'django_countries',
     'import_export',
-
+    'tailwind',
+    'theme',
+    'django_browser_reload',
  ]
 
+
+# Internal server ip we are using 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+
+# directory to npm in our os  
+NPM_BIN_PATH = "/home/disappeared/.nvm/versions/node/v20.15.0/bin/npm"
+
+
+
 MIDDLEWARE = [
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -155,3 +170,9 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+
+# Django and Tailwind Compatible App name 
+TAILWIND_APP_NAME = 'theme'
