@@ -5,6 +5,7 @@
 book title list
 {% endblock title %}
 
+
 {% block content %}
 <h1>books list</h1>
 {% if books %}
@@ -13,5 +14,10 @@ book title list
     <li><a href="">{{book.title}}</a></li>
     {% endfor %}
     {% endif %}
-</ul>
+ </ul>
+<form action="{% url 'books:books' %}" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="bg-slate-400 hover:bg-white p-3 ">Submit</button>
+</form>
 {% endblock content %}
