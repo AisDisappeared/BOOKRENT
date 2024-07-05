@@ -18,6 +18,6 @@ book title list
 <form action="{% url 'books:books' %}" method="post">
     {% csrf_token %}
     {{form.as_p}}
-    <button type="submit" class="bg-slate-400 hover:bg-white p-3 ">Submit</button>
+    <button type="submit" class="bg-slate-400 hover:bg-gray-300 p-3 ">Submit</button>
 </form>
 {% endblock content %}
