@@ -1,10 +1,8 @@
 from django.shortcuts import render
 from .models import *
+from django.views import generic 
 
-
-def BookList(request):
-    books = BookTitle.objects.all().order_by('title')
-    context = {"books":books}
-    return render(request,'books/books-list.html',context)
-
-
+class BookTitleListView(generic.ListView):
+    model = BookTitle
+    template_name = 'books/books-list.html'
+    context_object_name = 'books'

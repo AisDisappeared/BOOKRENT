@@ -1,1 +1,17 @@
 {% extends "base.html" %}
+
+
+{% block title %}
+book title list
+{% endblock title %}
+
+{% block content %}
+<h1>books list</h1>
+{% if books %}
+<ul>
+    {% for book in books %}
+    <li><a href="">{{book.title}}</a></li>
+    {% endfor %}
+    {% endif %}
+</ul>
+{% endblock content %}
