@@ -8,6 +8,10 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+		integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	{% tailwind_css %}
 </head>
 
@@ -15,7 +19,12 @@
 	<div class="grid grid-cols-12">
 		<div class="col-span-12">
 			<div class="pt-20 px-6">
-				<a href="{% url 'change' %}">switch mode</a>
+				<a href="{% url 'change' %}" class="fixed top-60 right-10 p-3 rounded-l-lg bg-slate-200 hover:bg-slate-300 dark:bg-yellow-300
+				 dark:hover:bg-yellow-400 text-slate-900 drop-shadow-md">
+					<i class="fa-solid {% if request.session.is_dark_mode %}fa-sun{% else %}fa-moon{% endif %} fa-xl">
+						
+					</i>
+				</a>
 				{% block content %}
 
 				{% endblock content %}
