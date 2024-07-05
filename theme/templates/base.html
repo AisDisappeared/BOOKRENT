@@ -15,14 +15,18 @@
 	{% tailwind_css %}
 </head>
 
-<body class="bg-gray-50 dark:bg-slate-800 dark:text-white">
+<body class="bg-gray-50 dark:bg-black dark:text-white">
+	{% include "layout/navbar.html" %}
 	<div class="grid grid-cols-12">
-		<div class="col-span-12">
+		<div class="col-span-1">
+			{% include "layout/sidebar.html" %}
+		</div>
+		<div class="col-span-11">
 			<div class="pt-20 px-6">
 				<a href="{% url 'change' %}" class="fixed top-60 right-10 p-3 rounded-l-lg bg-slate-200 hover:bg-slate-300 dark:bg-yellow-300
-				 dark:hover:bg-yellow-400 text-slate-900 drop-shadow-md">
+				 dark:hover:bg-yellow-400 text-slate-900 drop-shadow-md transition">
 					<i class="fa-solid {% if request.session.is_dark_mode %}fa-sun{% else %}fa-moon{% endif %} fa-xl">
-						
+
 					</i>
 				</a>
 				{% block content %}
