@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load widget_tweaks %}
 
 {% block title %}
 book title list
@@ -7,17 +7,43 @@ book title list
 
 
 {% block content %}
-<h1>books list</h1>
-{% if books %}
+<!-- <h1>books list</h1> -->
+<!-- {% if books %}
 <ul>
     {% for book in books %}
     <li><a href="">{{book.title}}</a></li>
     {% endfor %}
     {% endif %}
- </ul>
+</ul> -->
+
+
 <form action="{% url 'books:books' %}" method="post">
     {% csrf_token %}
-    {{form.as_p}}
+
+    <div class="mb-2">
+        <label for="{{form.title.id_for_label}}" class="block font-bold text-gray-500 text-xl dark:text-slate-200">title: </label>
+        {{form.title|add_class:'bg-gray-400 dark:bg-teal-600 text-white p-2 w-2/5 rounded-xl border-solid focus:border-white '}}
+        {% if form.title.errors %}
+            {% for error in form.title.errors %}
+              <div class="my-1 text-bold text-red-600">{{ error }}</div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="mb-2">
+        <label for="{{form.author.id_for_label}}" class="block font-bold text-gray-500 text-xl dark:text-slate-200">author: </label>
+        {{form.author|add_class:'bg-gray-400 dark:bg-teal-600 text-white p-2 w-2/5 rounded-xl border-solid focus:border-white '}}
+    </div>
+
+    <div class="mb-2">
+        <label for="{{form.publisher.id_for_label}}" class="block font-bold text-gray-500 text-xl dark:text-slate-200">publisher: </label>
+        {{form.publisher|add_class:'bg-gray-400 dark:bg-teal-600 text-white p-2 w-2/5 rounded-xl border-solid focus:border-white '}}
+    </div>
+
     <button type="submit" class="bg-slate-400 hover:bg-gray-300 p-3 ">Submit</button>
 </form>
+
+
+
+
 {% endblock content %}
