@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django_browser_reload',
     'sweetify',
     'notifications',
+    'widget_tweaks',
  ]
 
 
