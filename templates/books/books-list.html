@@ -17,6 +17,7 @@ book title list
 </ul> -->
 
 
+
 <form action="{% url 'books:books' %}" method="post">
     {% csrf_token %}
 
@@ -43,7 +44,16 @@ book title list
     <button type="submit" class="bg-slate-400 hover:bg-gray-300 p-3 ">Submit</button>
 </form>
 
+{% if messages %}
+  {% for message in messages %}
 
+    {% if 'info' in message.tags %}
+         {{message}}
+    {% elif 'error' in message.tags %}
+         {{message}}
+    {% endif %}
 
+  {% endfor %}
+{% endif %}
 
 {% endblock content %}
