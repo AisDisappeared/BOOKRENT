@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% load widget_tweaks %}
 
 {% block title %}
@@ -11,6 +12,8 @@
 <!-- include the header in the page -->
 {% include "components/header.html" with title="book title list" description='all books that are available to rent' is_form_available=True icon='<i class="fa-solid fa-plus"></i>' %}
 
+
+
 <!-- ascii upper letters -->
 {% for letter in letters %}
     <a href="{% url 'books:char-books' char=letter %}" class="{% if letter == selected_letter %} underline {% endif%}">{{letter}}</a>
@@ -18,32 +21,58 @@
 
 
 
-<!-- adding books form -->
-<form action="{% url 'books:books' %}" method="post">
-    {% csrf_token %}
+ <!-- form modal -->
+<div class="hidden relative z-50" aria-labelledby="modal-title" role="dialog" aria-modal="true" id="form-modal">
+    <div class="fixed inset-0 bg-gray-500 bg-opacity-75"></div>
+    <div class="fixed inset-0 z-10 overflow-y-auto">
+      <div class="flex min-h-full items-center justify-center p-4 text-center" id="backdrop">
+        <div class="relative transform overflow-hidden rounded-lg text-left shadow-xl transition-all my-8">
+            <form action="{% url 'books:books' %}" method="POST">
+                {% csrf_token %}
+                <div class="bg-white dark:text-white dark:bg-slate-300 pt-5 pb-4 px-8">
+                    <div class="mt-3 text-left">
+                        <h3 class="text-2xl font-medium leading-6 text-gray-900" id="modal-title">
+                            Adding new book
+                        </h3>
+                        <div class="mt-3">
+                              <div class="mb-2">
+                                  <label for="{{form.title.id_for_label}}" class="block font-bold text-gray-500 text-xl dark:text-slate-200">title: </label>
+                                  {{form.title|add_class:'bg-gray-400 dark:bg-teal-600 text-white p-2 w-2/5 rounded-xl border-solid focus:border-white '}}
+                                  {% if form.title.errors %}
+                                      {% for error in form.title.errors %}
+                                        <div class="my-1 text-bold text-red-600">{{ error }}</div>
+                                      {% endfor %}
+                                  {% endif %}
+                              </div>
 
-    <div class="mb-2">
-        <label for="{{form.title.id_for_label}}" class="block font-bold text-gray-500 text-xl dark:text-slate-200">title: </label>
-        {{form.title|add_class:'bg-gray-400 dark:bg-teal-600 text-white p-2 w-2/5 rounded-xl border-solid focus:border-white '}}
-        {% if form.title.errors %}
-            {% for error in form.title.errors %}
-              <div class="my-1 text-bold text-red-600">{{ error }}</div>
-            {% endfor %}
-        {% endif %}
+                              <div class="mb-2">
+                                  <label for="{{form.author.id_for_label}}" class="block font-bold text-gray-500 text-xl dark:text-slate-200">author: </label>
+                                  {{form.author|add_class:'bg-gray-400 dark:bg-teal-600 text-white p-2 w-2/5 rounded-xl border-solid focus:border-white '}}
+                              </div>
+
+                              <div class="mb-2">
+                                  <label for="{{form.publisher.id_for_label}}" class="block font-bold text-gray-500 text-xl dark:text-slate-200">publisher: </label>
+                                  {{form.publisher|add_class:'bg-gray-400 dark:bg-teal-600 text-white p-2 w-2/5 rounded-xl border-solid focus:border-white '}}
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-gray-50 dark:text-white dark:bg-slate-400 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+ 
+                    <button type="submit" class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                        save
+                    </button>
+
+                    <button type="button" id="cancel-btn" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 border border-red-600 rounded mr-3">
+                        cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+      </div>
     </div>
+</div>
 
-    <div class="mb-2">
-        <label for="{{form.author.id_for_label}}" class="block font-bold text-gray-500 text-xl dark:text-slate-200">author: </label>
-        {{form.author|add_class:'bg-gray-400 dark:bg-teal-600 text-white p-2 w-2/5 rounded-xl border-solid focus:border-white '}}
-    </div>
-
-    <div class="mb-2">
-        <label for="{{form.publisher.id_for_label}}" class="block font-bold text-gray-500 text-xl dark:text-slate-200">publisher: </label>
-        {{form.publisher|add_class:'bg-gray-400 dark:bg-teal-600 text-white p-2 w-2/5 rounded-xl border-solid focus:border-white '}}
-    </div>
-
-    <button type="submit" class="bg-slate-400 hover:bg-gray-300 p-3 ">Submit</button>
-</form>
 
 
 <!-- django alert messages -->
@@ -59,6 +88,8 @@
   {% endfor %}
 {% endif %}
 
+
+
 <!-- list of the books based on the selected letter by the user -->
 {% if books %}
   
@@ -71,5 +102,11 @@
 {% endif %}
 
 
+
+
+<!-- javascripts -->
+{% block scripts %}
+  <script src="{% static 'js/main.js' %}" defer></script>
+{% endblock scripts %}
 
 {% endblock content %}
