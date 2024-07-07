@@ -48,9 +48,9 @@ book title list
   {% for message in messages %}
 
     {% if 'info' in message.tags %}
-         {{message}}
+         {% include "components/alert.html" with is_info=True title="Success" body=message %}
     {% elif 'error' in message.tags %}
-         {{message}}
+         {% include "components/alert.html" with is_info=False title='Error' body=message %}
     {% endif %}
 
   {% endfor %}
