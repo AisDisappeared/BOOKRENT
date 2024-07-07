@@ -2,20 +2,23 @@
 {% load widget_tweaks %}
 
 {% block title %}
+  book list
 {% endblock title %}
 
 
 {% block content %}
 
-{% include "components/header.html" with title="book title list" description='all books that are available to rent' %}
+<!-- include the header in the page -->
+{% include "components/header.html" with title="book title list" description='all books that are available to rent' is_form_available=True icon='<i class="fa-solid fa-plus"></i>' %}
 
+<!-- ascii upper letters -->
 {% for letter in letters %}
     <a href="{% url 'books:char-books' char=letter %}" class="{% if letter == selected_letter %} underline {% endif%}">{{letter}}</a>
 {% endfor %}
 
 
 
-
+<!-- adding books form -->
 <form action="{% url 'books:books' %}" method="post">
     {% csrf_token %}
 
@@ -42,6 +45,8 @@
     <button type="submit" class="bg-slate-400 hover:bg-gray-300 p-3 ">Submit</button>
 </form>
 
+
+<!-- django alert messages -->
 {% if messages %}
   {% for message in messages %}
 
@@ -54,13 +59,13 @@
   {% endfor %}
 {% endif %}
 
-
+<!-- list of the books based on the selected letter by the user -->
 {% if books %}
   
   {% for book in books %}
     <li class="pt-4">{{book.title}}</li>
   {% endfor %}
-  
+
 {% else %}
     <p>no matching book with {{selected_letter}}</p>
 {% endif %}
