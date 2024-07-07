@@ -6,17 +6,15 @@
 
 
 {% block content %}
-<!-- <h1>books list</h1> -->
-<!-- {% if books %}
-<ul>
-    {% for book in books %}
-    <li><a href="">{{book.title}}</a></li>
-    {% endfor %}
-    {% endif %}
-</ul> -->
 
 {% include "components/header.html" with title="book title list" description='all books that are available to rent' %}
-{{test}}
+
+{% for letter in letters %}
+    <a href="{% url 'books:char-books' char=letter %}" class="{% if letter == selected_letter %} underline {% endif%}">{{letter}}</a>
+{% endfor %}
+
+
+
 
 <form action="{% url 'books:books' %}" method="post">
     {% csrf_token %}
@@ -55,5 +53,18 @@
 
   {% endfor %}
 {% endif %}
+
+
+{% if books %}
+  
+  {% for book in books %}
+    <li class="pt-4">{{book.title}}</li>
+  {% endfor %}
+  
+{% else %}
+    <p>no matching book with {{selected_letter}}</p>
+{% endif %}
+
+
 
 {% endblock content %}

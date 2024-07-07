@@ -5,6 +5,10 @@ from .models import *
 from django.views import generic
 from .forms import * 
 from django.contrib import messages
+import string
+
+
+
 
 class BookTitleListView(generic.FormView,generic.ListView):
     model = BookTitle
@@ -17,11 +21,16 @@ class BookTitleListView(generic.FormView,generic.ListView):
 
     # override get queryset method to avoid from recieving no object_list error.
     def get_queryset(self):
-        return BookTitle.objects.all()
+        selected_char = self.kwargs.get('char') if self.kwargs.get('char') else 'A'
+        return BookTitle.objects.filter(title__startswith=selected_char)        
+
 
     def get_context_data(self, **kwargs):
         context =  super().get_context_data(**kwargs)
-        context['test'] = 'test context to render from overriding get context data method function'
+        letters = list(string.ascii_uppercase)
+        context['letters'] = letters
+        selected_letter = self.kwargs.get('char')
+        context['selected_letter'] = selected_letter if self.kwargs.get('char') else 'A'
         return context
 
     # form valid method 
