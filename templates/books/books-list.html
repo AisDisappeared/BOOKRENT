@@ -16,7 +16,7 @@
 </ul> -->
 
 {% include "components/header.html" with title="book title list" description='all books that are available to rent' %}
-
+{{test}}
 
 <form action="{% url 'books:books' %}" method="post">
     {% csrf_token %}

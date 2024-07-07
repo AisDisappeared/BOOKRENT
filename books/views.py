@@ -19,6 +19,11 @@ class BookTitleListView(generic.FormView,generic.ListView):
     def get_queryset(self):
         return BookTitle.objects.all()
 
+    def get_context_data(self, **kwargs):
+        context =  super().get_context_data(**kwargs)
+        context['test'] = 'test context to render from overriding get context data method function'
+        return context
+
     # form valid method 
     def form_valid(self, form: BookTitleForm) -> HttpResponse:
         self.i_instance = form.save()
