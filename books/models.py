@@ -23,6 +23,7 @@ class BookTitle(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    # new field ===> book object . model below
     @property
     def get_books(self):
         return self.book_set.all()
@@ -37,14 +38,17 @@ class BookTitle(models.Model):
         super().save(*args, **kwargs)
 
 
+    # get absolute url method 
     def get_absolute_url(self):
         char = self.title[:1]
         return reverse("books:book-detail",kwargs={"slug":self.slug,"char":char})
     
-
+    # magic str method 
     def __str__(self):
         return f"{self.title}"
     
+
+
 
 
 
@@ -62,7 +66,6 @@ class Book(models.Model):
         return reverse("books:detail",kwargs={"slug":self.book_title.slug,"char":char , "book_id":self.book_id})
     
 
-
     # defining a new field by using decorator functions --- property
     @property 
     def get_status(self):
@@ -72,6 +75,15 @@ class Book(models.Model):
         return False
 
 
+    @property
+    def is_available(self):
+        if len(self.rental_set.all()) > 0:
+            status = self.rental_set.first().status
+            return True if status == '#1' else False
+        return True
+
+
+    # book delete absolute url
     def delete_object(self):
         char = self.book_title.title[:1]
         return reverse('books:book-delete',kwargs={'slug':self.book_title.slug,"char":char,"book_id":self.book_id})        
