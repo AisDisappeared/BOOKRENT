@@ -10,6 +10,19 @@
 
 {% block content %}
 
+
+<!-- django alert messages -->
+{% if messages %}
+    {% for message in messages %}
+       {% if 'info' in message.tags %}
+          {% include "components/alert.html" with is_info=True title="Success" body=message %}
+       {% endif %}
+    {% endfor %}
+{% endif %}
+
+
+
+
   <!-- header -->
   {% include "components/header.html" with title=object.title description='book title details' is_go_back=True %}
 

@@ -66,6 +66,8 @@ class BookDetailView(generic.DetailView):
         return book_requested
     
 
+
+
 class BookDeleteView(generic.DeleteView):
     model = Book 
     template_name = 'books/confirm_delete.html'
@@ -78,6 +80,7 @@ class BookDeleteView(generic.DeleteView):
     
 
     def get_success_url(self):
+        messages.add_message(self.request, messages.INFO, f"book with {self.get_object().book_id} has been deleted")
         letter = self.kwargs.get('char')
         slug = self.kwargs.get('slug')
         return reverse('books:book-detail',kwargs={"char":letter,"slug":slug})
