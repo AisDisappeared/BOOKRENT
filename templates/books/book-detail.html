@@ -9,12 +9,76 @@
 
 
 {% block content %}
+
+  <!-- header -->
   {% include "components/header.html" with title=object.title description='book title details' is_go_back=True %}
-  {% for obj in object.get_books %}
-    {{obj.book_title}} - {{obj.book_id}}
-  {% endfor %}
 
 
+
+<table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+        <tr class="border">
+            <th scope="col" class="py-3 px-6">
+                #
+            </th>
+            <th scope="col" class="py-3 px-6">
+                title
+            </th>
+            <th scope="col" class="py-3 px-6">
+                book id
+            </th>
+            <th scope="col" class="py-3 px-6">
+                qr code
+            </th>
+            <th scope="col" class="py-3 px-6">
+                status
+            </th>
+            <th scope="col" class="py-3 px-6">
+                available
+            </th>
+            <th scope="col" class="py-3 px-6">
+                select
+            </th>
+            <th scope="col" class="py-3 px-6">
+                delete
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for obj in object.get_books %}
+        <tr class="border-b dark:bg-gray-800 dark:border-gray-700 {% if not obj.is_read  %}font-bold{% endif %}">
+            <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              {{forloop.counter}}
+            </td>
+            <td class="py-4 px-6">
+              {{obj.book_title.title}}
+            </td>
+            <td class="py-4 px-6">
+              {{obj.book_id}}
+            </td>
+            <td class="py-4 px-6">
+              <img src="{{obj.Qr_code.url}}" alt="{{obj.book_id}}" class="rouned w-20 h-20">
+            </td> 
+            <td class="py-4 px-6">
+              {{obj.get_status}}
+            </td>
+            <td class="py-4 px-6">
+
+            </td>
+            <td class="py-4 px-6">
+
+            </td>
+            <td class="py-4 px-6">
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+  <!-- javascripts -->
 {% block scripts %}
   <script src="{% static 'js/test.js' %}" defer></script>
 {% endblock scripts %}

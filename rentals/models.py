@@ -2,14 +2,7 @@ from django.db import models
 from books.models import Book 
 from customers.models import Customer
 from datetime import timedelta 
-
-
-STATUS_CHOICES = (
-    ('#0','RENTED'),
-    ('#1','RETURNED'),
-    ('#2','LOST'),
-    ('#3','DELAYED'),
-)
+from .status import STATUS_CHOICES
 
 
 class Rental(models.Model):

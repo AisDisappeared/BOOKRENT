@@ -12,6 +12,7 @@ from io import BytesIO
 from PIL import Image
 from django.core.files import File 
 
+from rentals.status import STATUS_CHOICES
 
 
 class BookTitle(models.Model):
@@ -53,6 +54,14 @@ class Book(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =  models.DateTimeField(auto_now=True)
     Qr_code = models.ImageField(upload_to='Qr_codes/',blank=True,null=True)
+
+
+    @property 
+    def get_status(self):
+        if len(self.rental_set.all()) > 0:
+            statuses = dict(STATUS_CHOICES)
+            return statuses[self.rental_set.first().status]
+        return False
 
 
     def save(self, *args, **kwargs):
