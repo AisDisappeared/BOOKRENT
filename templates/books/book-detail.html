@@ -79,10 +79,10 @@
 
             </td>
             <td class="py-4 px-6">
-              <a href="{{obj.get_absolute_url}}">click</a>
+              {% include "components/buttons/select.html" with href=obj.get_absolute_url  %}
             </td>
             <td class="py-4 px-6">
-              <a href="{{obj.delete_object}}">delete</a>
+              {% include "components/buttons/delete.html" with href=obj.delete_object  %}
             </td>
         </tr>
         {% endfor %}
