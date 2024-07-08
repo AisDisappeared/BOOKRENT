@@ -94,7 +94,7 @@
 {% if books %}
   
   {% for book in books %}
-    <li class="pt-4">{{book.title}}</li>
+  <a href="{{ book.get_absolute_url }}"> <li class="pt-4">{{book.title}}</li></a> 
   {% endfor %}
 
 {% else %}

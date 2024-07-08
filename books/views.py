@@ -1,5 +1,6 @@
+from django.db.models.query import QuerySet
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from .models import *
 from django.views import generic
@@ -46,3 +47,7 @@ class BookTitleListView(generic.FormView,generic.ListView):
         return super().form_invalid(form)
         
     
+
+class BookTitleDetailView(generic.DetailView):
+    model = BookTitle
+    template_name = 'books/book-detail.html'

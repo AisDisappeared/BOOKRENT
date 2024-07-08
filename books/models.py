@@ -4,6 +4,7 @@ from publishers.models import Publisher
 from authors.models import Author
 from django.utils.text import slugify
 import uuid 
+from django.urls import reverse
 
 # Packages that we have to import to generate Qrcode
 import qrcode 
@@ -21,6 +22,10 @@ class BookTitle(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    @property
+    def get_books(self):
+        return self.book_set.all()
+        
 
     # save method for generating slug field .... even an object from booktitle model doesn't have slug .
     def save(self, *args, **kwargs):
@@ -30,6 +35,11 @@ class BookTitle(models.Model):
 
         super().save(*args, **kwargs)
 
+
+    def get_absolute_url(self):
+        char = self.title[:1]
+        return reverse("books:book-detail",kwargs={"slug":self.slug,"char":char})
+    
 
     def __str__(self):
         return f"{self.title}"
