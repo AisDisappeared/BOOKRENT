@@ -64,3 +64,20 @@ class BookDetailView(generic.DetailView):
         id = self.kwargs.get('book_id')
         book_requested = get_object_or_404(Allbooks,book_id=id)
         return book_requested
+    
+
+class BookDeleteView(generic.DeleteView):
+    model = Book 
+    template_name = 'books/confirm_delete.html'
+
+    def get_object(self):
+        Allbooks = Book.objects.all()
+        id = self.kwargs.get('book_id')
+        book_requested = get_object_or_404(Allbooks,book_id=id)
+        return book_requested
+    
+
+    def get_success_url(self):
+        letter = self.kwargs.get('char')
+        slug = self.kwargs.get('slug')
+        return reverse('books:book-detail',kwargs={"char":letter,"slug":slug})

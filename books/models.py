@@ -56,11 +56,14 @@ class Book(models.Model):
     Qr_code = models.ImageField(upload_to='Qr_codes/',blank=True,null=True)
 
 
+    # get absolute url method 
     def get_absolute_url(self):
         char = self.book_title.title[:1]
         return reverse("books:detail",kwargs={"slug":self.book_title.slug,"char":char , "book_id":self.book_id})
     
 
+
+    # defining a new field by using decorator functions --- property
     @property 
     def get_status(self):
         if len(self.rental_set.all()) > 0:
@@ -69,6 +72,12 @@ class Book(models.Model):
         return False
 
 
+    def delete_object(self):
+        char = self.book_title.title[:1]
+        return reverse('books:book-delete',kwargs={'slug':self.book_title.slug,"char":char,"book_id":self.book_id})        
+
+
+    # overriding django save method 
     def save(self, *args, **kwargs):
         if not self.book_id:
             self.book_id = str(uuid.uuid4()).replace('-','')[:24].lower()
@@ -87,5 +96,6 @@ class Book(models.Model):
         super().save(*args, **kwargs)
 
 
+    # magic str method 
     def __str__(self):
         return f"{self.book_title}"
