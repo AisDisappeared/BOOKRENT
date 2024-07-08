@@ -1,4 +1,4 @@
-<div class="bg-gradient-to-r from-indigo-950 via-purple-700 to-rose-200 text-white rounded-xl mb-10 h-20 flex justify-between items-center px-3">
+<div class="bg-gradient-to-r from-indigo-950 via-purple-700 to-rose-200 text-white rounded-xl mb-10 h-20 flex justify-between items-center px-3" id="head">
     <div class="flex-col">
         <div class="text-2xl">{{ title }}</div>
         <div class="text-md">{{ description }}</div>
@@ -9,5 +9,12 @@
                 <button class="bg-transparent border-2 text-white hover:bg-white hover:text-slate-800 hover:border-white p-3 rounded-xl text-xl" id="open-modal-btn">{{icon}}</button>
             </div>
         {% endif %}
+
+        {% if is_go_back %}
+             <div class="{% if is_form_available %} ml-4 {% endif %}">
+                <button class="bg-transparent border-2 text-white hover:bg-white hover:text-slate-800 hover:border-white p-3 rounded-xl text-xl" id="go-back-btn">Back</button>
+            </div>
+        {% endif %}
+  
     </div>
 </div>

@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
+
+
 
 {% block title %}
   book detail
@@ -6,13 +9,16 @@
 
 
 {% block content %}
-
-    <h1>book title:</h1>
+  {% include "components/header.html" with title=object.title description='book title details' is_go_back=True %}
   {% for obj in object.get_books %}
     {{obj.book_title}} - {{obj.book_id}}
   {% endfor %}
 
-<a href="{% url 'books:books' %}" class="flex">All books</a>
+
+{% block scripts %}
+  <script src="{% static 'js/test.js' %}" defer></script>
+{% endblock scripts %}
+
 
 
 {% endblock content %}

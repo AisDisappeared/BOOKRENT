@@ -5,7 +5,6 @@ const openModalBtn = document.getElementById('open-modal-btn')
 const backdrop = document.getElementById('backdrop')
 
 
-
 // printing the variables
 console.log(formModal)
 console.log(cancelbtn)
@@ -27,3 +26,5 @@ formModal.addEventListener('click',(e)=>{
     console.log(e.target)
     formModal.classList.add('hidden')
 })
+
+
