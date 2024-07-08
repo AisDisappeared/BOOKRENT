@@ -50,11 +50,16 @@ class BookTitle(models.Model):
 
 class Book(models.Model):
     book_title = models.ForeignKey(BookTitle,on_delete=models.CASCADE)
-    book_id = models.CharField(max_length=255,blank=True)
+    book_id = models.CharField(max_length=255,blank=True,unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =  models.DateTimeField(auto_now=True)
     Qr_code = models.ImageField(upload_to='Qr_codes/',blank=True,null=True)
 
+
+    def get_absolute_url(self):
+        char = self.book_title.title[:1]
+        return reverse("books:detail",kwargs={"slug":self.book_title.slug,"char":char , "book_id":self.book_id})
+    
 
     @property 
     def get_status(self):
@@ -66,7 +71,7 @@ class Book(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.book_id:
-            self.book_id = str(uuid.uuid4).replace('-','')[:24].lower()
+            self.book_id = str(uuid.uuid4()).replace('-','')[:24].lower()
 
         # Generate one
         qrcode_image = qrcode.make(self.book_id)

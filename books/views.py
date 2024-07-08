@@ -1,3 +1,4 @@
+from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
@@ -51,3 +52,15 @@ class BookTitleListView(generic.FormView,generic.ListView):
 class BookTitleDetailView(generic.DetailView):
     model = BookTitle
     template_name = 'books/book-detail.html'
+
+
+
+class BookDetailView(generic.DetailView):
+    model = Book
+    template_name = 'books/singlebook.html'
+
+    def get_object(self):
+        Allbooks = Book.objects.all()
+        id = self.kwargs.get('book_id')
+        book_requested = get_object_or_404(Allbooks,book_id=id)
+        return book_requested
