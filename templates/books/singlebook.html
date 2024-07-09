@@ -1,12 +1,48 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% load static %}
-
-{% block title %}
-  
-{% endblock title %}
-
 
 
 {% block content %}
-  {{object.book_title}} - {{object.book_id}}
+{% include "components/header.html" with title=object.book_title.title description=object.book_title.publisher.name is_go_back=True %}
+<div class="flex justify-center">
+    <div>
+        <div class="text-center mb-3">
+          {% if object.is_available %}
+             {% if object.get_status %}
+                available with <b>{{object.get_status}}</b> status
+             {% else %}
+             never rented
+             {% endif %}
+          {% else %}
+          Not available
+          {% endif %}
+        </div>
+            <img src="{{object.Qr_code.url}}" alt="{{obj.book_id}}" class="rounded-lg w-45 h-45">
+        <div class="mt-7 text-center">
+            {% if not object.is_available %}
+              <a href="" class="bg-yellow-500 hover:bg-yellow-600 text-white dark:text-slate-900 rouned-lg p-3">change status</a>
+              <a href="" class="bg-teal-500 hover:bg-teal-600 text-white rouned p-3">history</a>
+            {% endif %}
+        </div>
+    </div>  
+</div>
+
+<div class="flex justify-center">
+    <div class="mt-10 p-3 rounded-lg relative bg-slate-200 dark:bg-slate-600 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 drop-shadow-md w-1/2">
+        <div id="book-copy-box">{{object.book_id}}</div>
+        <div class="dark:text-white absolute right-3 top-3" id="copy-box-btn">
+          <i class="fa-regular fa-copy fa-xl cursor-copy"></i>
+        </div>
+</div>
+
+
+
+
+
+{% block scripts %}
+<script src="{% static 'js/test.js' %}"  defer></script>
+{% endblock scripts %}
+
+
+
 {% endblock content %}
