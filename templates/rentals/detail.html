@@ -1,30 +1,20 @@
 {% extends "base.html" %}
 {% load static %}
-{% load widget_tweaks %}
+{% load humanize %}
+
 
 
 
 {% block title %}
+  
 {% endblock title %}
-
-
 
 
 {% block content %}
 
+<!-- include the header in the page -->
+{% include "components/header.html" with title="book rent history detail" description='u can check the rent history of each book in our service' %}
 
-<div class="flex justify-center items-center h-[500px]">
-
-  <form method="get" autocomplete="off" action="{% url 'rentals:rental-search' %}" class="w-[400px]">
-    {% csrf_token %}
-    <label for="{{form.text.id_for_label}}"
-      class="block text-3xl text-gray-700 dark:text-white font-bold mb-2 text-center">search for books</label>
-    {{form.text|add_class:'bg-slate-100 dark:bg-slate-100 text-slate-600 rounded-lg p-3 drop-shadow-xl w-full'}}
-    <button class=" flex justify-center w-full rounded-md bg-purple-600 hover:bg-purple-400 text-white pt-1 text-xl "
-      type="submit">search</button>
-  </form>
-
-</div>
 
 
 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -43,18 +33,18 @@
         Customer
       </th>
       <th scope="col" class="py-3 px-6">
-        rent start 
+         rent start 
       </th>
       <th scope="col" class="py-3 px-6">
         rent end 
       </th>
-      <th scope="col" class="py-3 px-6">
-        select
+       <th scope="col" class="py-3 px-6">
+        is closed 
       </th>
     </tr>
   </thead>
   <tbody>
-    {% for obj in rentobjects %}
+    {% for obj in object_list %}
     <tr class="border-b dark:bg-gray-800 dark:border-gray-700 {% if not obj.is_read  %}font-bold{% endif %}">
       <td scope="row" class="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
         {{forloop.counter}}
@@ -66,7 +56,7 @@
         {{obj.status}}
       </td>
       <td class="py-4 px-6">
-        {{obj.customer}}
+        {{obj.customer.username}}
       </td>
       <td class="py-4 px-6">
         {{obj.rent_start_date}}
@@ -75,7 +65,11 @@
         {{obj.rent_end_date}}
       </td>
       <td class="py-4 px-6">
-        {% include "components/buttons/select.html" with href=obj.get_absolute_url %}
+        {% if obj.is_closed %}
+           <i class="fa-solid fa-check text-teal-300 fa-lg"></i>
+        {% else %}
+           <i class="fa-solid fa-xmark text-red-400 fa-lg"></i>
+        {% endif %}
       </td>
     </tr>
     {% endfor %}
@@ -83,14 +77,11 @@
 </table>
 
 
+
 {% endblock content %}
 
 
 
-
-
-
-
 {% block scripts %}
-<script src="{% static 'js/test.js' %}" defer></script>
+  
 {% endblock scripts %}

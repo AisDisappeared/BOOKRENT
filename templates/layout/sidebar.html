@@ -9,14 +9,14 @@
         </li>
         <li class="mb-6 mx-auto">
             <a href="{% url 'books:books' %}"
-                class="grid h-12 place-items-center cursor-pointer hover:text-slate-100 duration-300 text-slate-300 {% if 'books' in request.path %}text-orange-400{% endif %}">
+                class="grid h-12 place-items-center cursor-pointer hover:text-slate-100 duration-300 text-slate-300 {% if 'books' in request.path %} text-teal-300 {% endif %}">
                 <i class="fa-solid fa-book fa-xl"></i>
                 <p>books</p>
             </a>
         </li>
         <li class="mb-6 mx-auto">
-            <a href="{% url 'rentals:rentals' %}"
-                class="grid h-12 place-items-center cursor-pointer hover:text-slate-100 duration-300 text-slate-300 {% if 'rentals' in request.path %}text-orange-400{% endif %}">
+            <a href="{% url 'rentals:rental-search' %}"
+                class="grid h-12 place-items-center cursor-pointer hover:text-slate-100 duration-300 text-slate-300 {% if 'rentals' in request.path %} text-teal-300 {% endif %}">
                 <i class="fa-solid fa-bookmark fa-xl"></i>
                 <p>rentals</p>
             </a>

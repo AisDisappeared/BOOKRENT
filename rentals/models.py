@@ -2,6 +2,7 @@ from django.db import models
 from books.models import Book 
 from customers.models import Customer
 from datetime import timedelta 
+from django.urls import reverse
 from .status import STATUS_CHOICES
 
 
@@ -19,10 +20,19 @@ class Rental(models.Model):
     class Meta:
         ordering = ['-created_at']
 
+
+    # get absolute url method 
+    def get_absolute_url(self):
+        return reverse("rentals:detail",kwargs={"book_id":self.book.book_id})
+    
+
+    
     def save(self, *args, **kwargs):
         if not self.rent_end_date:
             self.rent_end_date = self.rent_start_date + timedelta(days=14)
         super().save(*args, **kwargs)
+
+
 
     def __str__(self):
         return f"{self.book.book_id} rented by {self.customer.username}"

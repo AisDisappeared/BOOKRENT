@@ -52,6 +52,11 @@ class BookTitle(models.Model):
 
 
 
+
+
+
+
+
 class Book(models.Model):
     book_title = models.ForeignKey(BookTitle,on_delete=models.CASCADE)
     book_id = models.CharField(max_length=255,blank=True,unique=True)
@@ -102,9 +107,7 @@ class Book(models.Model):
         buffer = BytesIO()
         canvas.save(buffer,'PNG')
         self.Qr_code.save(fname, File(buffer),save=False)
-        canvas.close()
-
-        
+        canvas.close() 
         super().save(*args, **kwargs)
 
 

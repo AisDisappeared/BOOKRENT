@@ -5,7 +5,7 @@ from .views import *
 
 app_name = 'rentals'
 urlpatterns = [
-    path('',AllRentals,name='rentals'),
-    path('search/',RentalSearchView,name='rental-search'),
+    path('',RentalSearchView,name='rental-search'),
+    path('book-history/<str:book_id>/',BookRentalHistoryView.as_view(),name='detail'),
 
 ]
