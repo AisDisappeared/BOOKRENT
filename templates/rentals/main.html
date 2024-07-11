@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+    <form action="{% url 'rentals:rental-search' %}">
+        {{form.as_p}}
+        <button type="submit">submit</button>
+    </form>
+    {% for obj in rentobjects %}
+      <li>{{obj}}</li>
+    {% endfor %}
+{% endblock content %}

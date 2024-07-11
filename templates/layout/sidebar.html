@@ -1,15 +1,24 @@
 <aside class="hidden md:block sticky bg-slate-900 h-screen text-white w-full pt-24 text-sm">
     <ul>
         <li class="mb-6 mx-auto">
-            <a href="" class="grid h-12 place-items-center cursor-pointer hover:text-slate-200 duration-300 text-slate-500">
+            <a href=""
+                class="grid h-12 place-items-center cursor-pointer hover:text-slate-200 duration-300 text-slate-500">
                 <i class="fa-solid fa-chart-pie fa-xl"></i>
                 <p>dashboard</p>
             </a>
         </li>
         <li class="mb-6 mx-auto">
-            <a href="" class="grid h-12 place-items-center cursor-pointer hover:text-slate-200 duration-300 text-slate-500">
+            <a href="{% url 'books:books' %}"
+                class="grid h-12 place-items-center cursor-pointer hover:text-slate-200 duration-300 text-slate-500 {% if 'books' in request.path %}text-white{% endif %}">
                 <i class="fa-solid fa-book fa-xl"></i>
                 <p>books</p>
+            </a>
+        </li>
+        <li class="mb-6 mx-auto">
+            <a href="{% url 'rentals:rentals' %}"
+                class="grid h-12 place-items-center cursor-pointer hover:text-slate-200 duration-300 text-slate-500 {% if 'rentals' in request.path %}text-white{% endif %}">
+                <i class="fa-solid fa-bookmark fa-xl"></i>
+                <p>rentals</p>
             </a>
         </li>
     </ul>
