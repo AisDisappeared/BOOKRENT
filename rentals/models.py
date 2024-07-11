@@ -21,6 +21,10 @@ class Rental(models.Model):
         ordering = ['-created_at']
 
 
+    def status_text(self):
+        statuses = dict(STATUS_CHOICES)
+        return statuses[self.status]
+
     # get absolute url method 
     def get_absolute_url(self):
         return reverse("rentals:detail",kwargs={"book_id":self.book.book_id})
