@@ -60,7 +60,7 @@ class BookTitle(models.Model):
 class Book(models.Model):
     id = models.CharField(primary_key=True,default=uuid.uuid4,max_length=36,editable=False)
     book_title = models.ForeignKey(BookTitle,on_delete=models.CASCADE)
-    book_id = models.CharField(max_length=255,blank=True,unique=True)
+    book_id = models.CharField(max_length=255,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at =  models.DateTimeField(auto_now=True)
     Qr_code = models.ImageField(upload_to='Qr_codes/',blank=True,null=True)
