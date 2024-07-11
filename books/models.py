@@ -13,7 +13,7 @@ from PIL import Image
 from django.core.files import File 
 
 from rentals.status import STATUS_CHOICES
-
+from .utils import book_id_hash
 
 class BookTitle(models.Model):
     title = models.CharField(max_length=255,unique=True)
@@ -98,7 +98,8 @@ class Book(models.Model):
     # overriding django save method 
     def save(self, *args, **kwargs):
         if not self.book_id:
-            self.book_id = str(uuid.uuid4()).replace('-','')[:24].lower()
+            # self.book_id = str(uuid.uuid4()).replace('-','')[:24].lower()
+            self.book_id = book_id_hash(self.book_title.title,self.book_title.publisher.name)
 
         # Generate one
         qrcode_image = qrcode.make(self.book_id)
