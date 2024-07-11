@@ -1,12 +1,47 @@
 {% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+
+{% block title %}
+{% endblock title %}
+
+
 
 
 {% block content %}
-    <form action="{% url 'rentals:rental-search' %}">
-        {{form.as_p}}
-        <button type="submit">submit</button>
-    </form>
-    {% for obj in rentobjects %}
-      <li>{{obj}}</li>
-    {% endfor %}
+
+
+<div class="flex justify-center items-center h-[500px]">
+
+  <form method="get" autocomplete="off" action="{% url 'rentals:rental-search' %}" class="w-[400px]">
+    {% csrf_token %}  
+    <label for="{{form.text.id_for_label}}" class="block text-3xl text-gray-700 dark:text-white font-bold mb-2 text-center">search for books</label>
+    {{form.text|add_class:'bg-slate-100 dark:bg-slate-100 text-slate-600 rounded-lg p-3 drop-shadow-xl w-full'}}
+    <button class=" flex justify-center w-full rounded-md bg-purple-600 hover:bg-purple-400 text-white pt-1 text-xl " type="submit">search</button>
+  </form>
+
+</div>
+
+
+<!-- {% for obj in rentobjects %}
+<li>{{obj}}</li>
+{% endfor %} -->
+
+
+
+
+
 {% endblock content %}
+
+
+
+
+
+
+
+
+{% block scripts %}
+
+{% endblock scripts %}
