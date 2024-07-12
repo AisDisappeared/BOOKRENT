@@ -20,9 +20,9 @@
             <img src="{{object.Qr_code.url}}" alt="{{obj.book_id}}" class="rounded-lg w-45 h-45">
         <div class="mt-7 text-center">
             {% if not object.is_available %}
-              <a href="" class="bg-yellow-500 hover:bg-yellow-600 text-white dark:text-slate-900 rouned-lg p-3">change status</a>
-              <a href="{% url 'rentals:detail' object.book_id %}" class="bg-teal-500 hover:bg-teal-600 text-white rouned p-3">history</a>
+              <a href="{% url 'rentals:update' object.book_id object.rental_id %}" class="bg-yellow-500 hover:bg-yellow-600 text-white dark:text-slate-900 rouned-lg p-3">change status</a>
             {% endif %}
+              <a href="{% url 'rentals:detail' object.book_id %}" class="bg-teal-500 hover:bg-teal-600 text-white rouned p-3">history</a>
         </div>
     </div>  
 </div>

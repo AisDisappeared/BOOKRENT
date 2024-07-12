@@ -2,7 +2,7 @@ from audioop import reverse
 from typing import Any
 from django.db.models.query import QuerySet
 from django.http import HttpResponseRedirect
-from django.views.generic import ListView
+from django.views.generic import ListView,UpdateView
 from django.shortcuts import redirect, render
 from books.forms import BookTitleForm
 from .models import *
@@ -35,3 +35,11 @@ def RentalSearchView(request):
             
         context = {"form":form,"rentobjects":rentobjects}
         return render(request,'rentals/main.html',context)
+    
+
+
+# we don't have to create a form seperately when we are using from updateview ... it creates it for us .
+class RentalStatusUpdateView(UpdateView):
+    model = Rental
+    template_name = 'rentals/update.html'
+    fields = ('status',)
