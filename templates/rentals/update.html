@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+
 
 {% block title %}
   update status 
@@ -8,7 +13,27 @@
 
 
 {% block content %}
-  going to update the status field of each rent object
+{% include "components/header.html" with title="update rental status field" description=object.book.book_title is_go_back=True %}
+
+<form action="" method="post">
+  {% csrf_token %}
+
+  <div class="mb-2">
+      <label for="{{form.status.id_for_label}}" class="block font-bold text-gray-500 text-xl dark:text-slate-200">status: </label>
+          {{form.status|add_class:'bg-gray-400 dark:bg-slate-600 text-white p-2 w-2/5 rounded-xl border-solid focus:border-white '}}
+  </div>
+  <button type="submit" class="px-5 py-2 text-white bg-sky-400 hover:bg-sky-500 rounded-xl mt-3 ">update</button>
+</form>
+
+
+
+
+
+
+
+
+
+
 {% endblock content %}
 
 
@@ -16,5 +41,5 @@
 
 
 {% block scripts %}
-  
+  <script src="{% static 'js/test.js' %}" defer></script>
 {% endblock scripts %}

@@ -1,5 +1,7 @@
 from audioop import reverse
+from http.cookiejar import LWPCookieJar
 from typing import Any
+from urllib import request
 from django.db.models.query import QuerySet
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView,UpdateView
@@ -7,8 +9,12 @@ from django.shortcuts import redirect, render
 from books.forms import BookTitleForm
 from .models import *
 from .forms import SearchBookForm 
+from datetime import datetime
 from books.models import Book
 import sweetify
+
+
+
 
 
 class BookRentalHistoryView(ListView):
@@ -43,3 +49,20 @@ class RentalStatusUpdateView(UpdateView):
     model = Rental
     template_name = 'rentals/update.html'
     fields = ('status',)
+
+
+    def get_success_url(self):
+        book_id = self.kwargs.get('book_id')
+        return reverse('rentals:detail',kwargs={"book_id":book_id})
+    
+    
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        if instance.status == '#1':
+            instance.return_date = datetime.today().date()
+            instance.is_closed = True 
+        instance.save()
+        sweetify.success(self.request, 'Rental status updated successfully!',persistent='thanks')
+        return super().form_valid(form)
+    
+    
