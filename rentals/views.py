@@ -79,6 +79,12 @@ class NewRentView(CreateView):
         book_id = self.kwargs.get('book_id')
         return reverse('rentals:detail',kwargs={"book_id":book_id})
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['id'] = self.kwargs.get('book_id')
+        return context
+
+
     def form_valid(self, form):
         instance = form.save(commit=False)
         id = self.kwargs.get('book_id')

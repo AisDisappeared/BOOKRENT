@@ -6,13 +6,15 @@
 
 
 {% block title %}
-  
+  new rent
 {% endblock title %}
 
 
 
-
 {% block content %}
+{% include "components/header.html" with title="new rental" description=id is_go_back=True %}
+
+
     <form action="" method="post">
   {% csrf_token %}
 
@@ -28,5 +30,5 @@
 
 
 {% block scripts %}
-  
+<script src="{% static 'js/test.js' %}" defer></script>
 {% endblock scripts %}
