@@ -69,7 +69,7 @@ class Book(models.Model):
     # get absolute url method 
     def get_absolute_url(self):
         char = self.book_title.title[:1]
-        return reverse("books:detail",kwargs={"slug":self.book_title.slug,"char":char , "book_id":self.book_id})
+        return reverse("books:detail",kwargs={"slug":self.book_title.slug,"char":char , "book_id":self.id})
     
 
     # defining a new field by using decorator functions --- property
@@ -92,7 +92,7 @@ class Book(models.Model):
     # book delete absolute url
     def delete_object(self):
         char = self.book_title.title[:1]
-        return reverse('books:book-delete',kwargs={'slug':self.book_title.slug,"char":char,"book_id":self.book_id})        
+        return reverse('books:book-delete',kwargs={'slug':self.book_title.slug,"char":char,"book_id":self.id})        
 
 
     # overriding django save method 

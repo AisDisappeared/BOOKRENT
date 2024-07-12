@@ -49,15 +49,11 @@ class BookTitleListView(generic.FormView,generic.ListView):
         
     
 
-
-
     
 
 class BookTitleDetailView(generic.DetailView):
     model = BookTitle
     template_name = 'books/book-detail.html'
-
-
 
 
 
@@ -70,7 +66,7 @@ class BookDetailView(generic.DetailView):
     def get_object(self):
         Allbooks = Book.objects.all()
         id = self.kwargs.get('book_id')
-        book_requested = get_object_or_404(Allbooks,book_id=id)
+        book_requested = get_object_or_404(Allbooks,id=id)
         return book_requested
     
 
@@ -83,7 +79,7 @@ class BookDeleteView(generic.DeleteView):
     def get_object(self):
         Allbooks = Book.objects.all()
         id = self.kwargs.get('book_id')
-        book_requested = get_object_or_404(Allbooks,book_id=id)
+        book_requested = get_object_or_404(Allbooks,id=id)
         return book_requested
     
 
