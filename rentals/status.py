@@ -10,5 +10,5 @@ STATUS_CHOICES = (
 FORMAT_CHOICES = (
     ('#0','csv'),
     ('#1','json'),
-    ('#2','xls'),
+    ('#2','yaml'),
 )

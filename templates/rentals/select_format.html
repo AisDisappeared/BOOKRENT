@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+
+
 
 {% block title %}
   
@@ -7,10 +12,19 @@
 
 
 {% block content %}
-  
+
+{% include "components/header.html" with title="download rental history info" description=id is_go_back=True %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{form}}
+    <button type="submit" class="p-3 mt-3 bg-teal-500 hover:bg-teal-600 rounded-lg text-white">download</button>
+</form>
+
+
 {% endblock content %}
 
 
 {% block scripts %}
-  
+  <script src="{% static 'js/test.js' %}" defer></script>
 {% endblock scripts %}
