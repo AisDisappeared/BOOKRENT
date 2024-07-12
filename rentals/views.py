@@ -9,7 +9,7 @@ from django.db.models import Q
 from django.shortcuts import redirect, render
 from books.forms import BookTitleForm
 from .models import *
-from .forms import SearchBookForm 
+from .forms import *
 from datetime import datetime
 from books.models import Book
 import sweetify
@@ -95,3 +95,13 @@ class NewRentView(CreateView):
         instance.save()
         return super().form_valid(form)
     
+
+class DownloadRentalsView(FormView):
+    template_name = 'rentals/select_format.html'
+    form_class = SelectExportOptionForm
+
+    def get_success_url(self):
+        return self.request.path
+    
+    def post(self,request,**kwargs):
+        pass
