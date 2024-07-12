@@ -30,6 +30,8 @@ def RentalSearchView(request):
             book = Book.objects.filter(book_id=s).exists()
             if s is not None and book: 
                 return redirect('rentals:detail',s)
+            elif s is not None and not book:
+                return render(request,'rentals/404.html')
             
         context = {"form":form,"rentobjects":rentobjects}
         return render(request,'rentals/main.html',context)

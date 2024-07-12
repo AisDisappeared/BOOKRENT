@@ -49,9 +49,17 @@ class BookTitleListView(generic.FormView,generic.ListView):
         
     
 
+
+
+    
+
 class BookTitleDetailView(generic.DetailView):
     model = BookTitle
     template_name = 'books/book-detail.html'
+
+
+
+
 
 
 
