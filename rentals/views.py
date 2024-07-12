@@ -4,7 +4,8 @@ from typing import Any
 from urllib import request
 from django.db.models.query import QuerySet
 from django.http import HttpResponseRedirect
-from django.views.generic import ListView,UpdateView
+from django.views.generic import *
+from django.db.models import Q
 from django.shortcuts import redirect, render
 from books.forms import BookTitleForm
 from .models import *
@@ -23,7 +24,7 @@ class BookRentalHistoryView(ListView):
 
     def get_queryset(self):
         book_id = self.kwargs.get('book_id')
-        return Rental.objects.filter(book__book_id=book_id)
+        return Rental.objects.filter(Q(book__book_id=book_id) | Q(book_id=book_id))
 
 
 def RentalSearchView(request):
@@ -65,4 +66,26 @@ class RentalStatusUpdateView(UpdateView):
         sweetify.success(self.request, 'Rental status updated successfully!',persistent='thanks')
         return super().form_valid(form)
     
+    
+
+
+
+class NewRentView(CreateView):
+    model = Rental
+    template_name = 'rentals/newrent.html'
+    fields = ('customer',)
+
+    def get_success_url(self):
+        book_id = self.kwargs.get('book_id')
+        return reverse('rentals:detail',kwargs={"book_id":book_id})
+    
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        id = self.kwargs.get('book_id')
+        obj = Book.objects.get(id=id)
+        instance.book = obj
+        instance.status = '#0'
+        instance.rent_start_date = datetime.today().date()
+        instance.save()
+        return super().form_valid(form)
     

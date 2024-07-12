@@ -8,6 +8,7 @@
     <div>
         <div class="text-center mb-3">
           {% if object.is_available %}
+             <a href="{% url 'rentals:newrent' object.id %}" class="p-3 bg-sky-500 hover:bg-sky-600 rounded-lg ">rent</a>
              {% if object.get_status %}
                  <b>{{object.get_status}}</b>
              {% else %}
