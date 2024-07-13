@@ -1,10 +1,32 @@
 <nav class="fixed flex items-center h-16 bg-gradient-to-r bg-zinc-300 mb-2 w-full z-10 text-black">
-    <div class="flex justify-between w-full px-4 py-3">
+    <div class="flex justify-between items-center w-full px-4 py-3">
         <div>
             logo
         </div>
-        <div class="bg-white rounded-full">
-            <svg width="50" height="50" data-jdenticon-value="{{request.user.username}}"></svg>
+        <div class="flex items-center">
+            <div class="relative" id="dropdown-box">
+                <button type="button" id="menu-dropdown" class="bg-black bg-opacity-10 rounded mr-5 drop-shadow-lg p-3 hover:opacity-80 focus:ring-4 focus:ring-blue-300">
+                    menu &nbsp; <i class="fa-solid fa-caret-down"></i>
+                </button>
+                <div id="dropdown" class="hidden absolute pl-2 bg-white shadow min-w-full text-slate-700 rounded">
+                    <ul class="py-1 text-sm text-slate-700">
+
+                        <li>
+                            <div class="block py-2 px-4 border-b border-slate-200">
+                            {{request.user.username}} <i class="fa-solid fa-user-circle pl-1"></i>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="" class="block py-2 px-4 hover:bg-gray-100">logout</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="bg-white rounded-full">
+                <svg width="50" height="50" data-jdenticon-value="{{request.user.username}}"></svg>
+            </div>
+
         </div>
     </div>
 </nav>
