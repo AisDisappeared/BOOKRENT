@@ -1,8 +1,8 @@
 <aside class="hidden md:block sticky bg-pink-700 h-screen text-white w-full pt-24 text-sm">
     <ul>
         <li class="mb-6 mx-auto">
-            <a href=""
-                class="grid h-12 place-items-center cursor-pointer hover:text-slate-100 duration-300 text-slate-300">
+            <a href="{% url 'home' %}"
+                class="grid h-12 place-items-center cursor-pointer hover:text-slate-100 duration-300 text-slate-300 {% if request.path == '/' %} text-teal-300{% endif %}">
                 <i class="fa-solid fa-chart-pie fa-xl"></i>
                 <p>dashboard</p>
             </a>
