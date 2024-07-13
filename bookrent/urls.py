@@ -22,10 +22,12 @@ from .views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',DashboardView.as_view(),name='home'),
     path("__reload__/", include("django_browser_reload.urls")),
     path('books/',include('books.urls')),
     path('change_mode/',change_mode,name='change'),
     path('rentals/',include('rentals.urls',namespace='rentals')),
+    path('chart-data/',chart_data,name='charts'),
 
 ]
 
