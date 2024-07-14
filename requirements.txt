@@ -25,6 +25,7 @@ mdurl==0.1.2
 pillow==10.3.0
 psycopg2-binary==2.9.9
 Pygments==2.18.0
+pyotp==2.9.0
 pypng==0.20220715.0
 python-dateutil==2.9.0.post0
 python-slugify==8.0.4

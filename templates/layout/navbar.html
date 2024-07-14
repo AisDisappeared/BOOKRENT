@@ -10,15 +10,23 @@
                 </button>
                 <div id="dropdown" class="hidden absolute pl-2 bg-white shadow min-w-full text-slate-700 rounded">
                     <ul class="py-1 text-sm text-slate-700">
-
+                        {% if request.user.is_authenticated %}
                         <li>
                             <div class="block py-2 px-4 border-b border-slate-200">
                             {{request.user.username}} <i class="fa-solid fa-user-circle pl-1"></i>
                             </div>
                         </li>
                         <li>
-                            <a href="" class="block py-2 px-4 hover:bg-gray-100">logout</a>
+                            <a href="{% url 'accounts:logout' %}" class="block py-2 px-4 hover:bg-gray-100">logout</a>
                         </li>
+                        {% else %}
+                        <li>
+                            <a href="{% url 'accounts:login' %}" class="block py-2 px-4 hover:bg-gray-100">login</a>
+                        </li>
+                        <li>
+                            <a href="" class="block py-2 px-4 hover:bg-gray-100">Sign up</a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
 
