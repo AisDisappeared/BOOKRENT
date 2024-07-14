@@ -28,6 +28,7 @@ urlpatterns = [
     path('change_mode/',change_mode,name='change'),
     path('rentals/',include('rentals.urls',namespace='rentals')),
     path('chart-data/',chart_data,name='charts'),
+    path('accounts/',include('accounts.urls')),
 
 ]
 
