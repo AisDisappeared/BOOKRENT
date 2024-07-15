@@ -1,7 +1,9 @@
+{% load static %}
+
 <nav class="fixed flex items-center h-16 bg-gradient-to-r bg-zinc-300 mb-2 w-full z-10 text-black">
     <div class="flex justify-between items-center w-full px-4 py-3">
         <div>
-            logo
+            <a href="{% url 'home' %}"><h2 class="flex justify-center items-center p-3 shadow-lg text-2xl bg-slate-400 rounded-xl h-12 hover:bg-slate-700 hover:text-teal-100">bookrent</h2></a>
         </div>
         <div class="flex items-center">
             <div class="relative" id="dropdown-box">
