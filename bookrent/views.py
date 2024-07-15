@@ -1,8 +1,9 @@
-from django.shortcuts import render 
+from django.shortcuts import redirect, render 
 from django.http import HttpResponseRedirect
 from django.views.generic import TemplateView
 from django.http import JsonResponse
 from django.db.models import Count,Sum
+from bookrent.utils import is_ajax
 from rentals.models import Rental
 from books.models import *
 from customers.models import Customer
@@ -31,6 +32,9 @@ class DashboardView(LoginRequiredMixin,TemplateView):
 
 @login_required
 def chart_data(request):
+    if not is_ajax(request):
+        return redirect('/')
+
     data = []
     all_books = len(Book.objects.all())
     all_booktitles = len(BookTitle.objects.all())

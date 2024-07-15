@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta 
 import pyotp
 
+
 def send_otp(request):
     # Time-Based One-Time Password 
     totp = pyotp.TOTP(pyotp.random_base32(),interval=60)
