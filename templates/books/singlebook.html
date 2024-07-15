@@ -2,6 +2,12 @@
 {% load static %}
 
 
+
+{% block title %}
+  single book 
+{% endblock title %}
+
+
 {% block content %}
 {% include "components/header.html" with title=object.book_title.title description=object.book_title.publisher.name is_go_back=True %}
 <div class="flex justify-center">

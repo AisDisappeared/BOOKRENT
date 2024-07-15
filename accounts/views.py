@@ -2,12 +2,34 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth import authenticate , login , logout 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 import sweetify
 import pyotp
 
 from .forms import * 
 from .utils import send_otp
 from datetime import datetime
+
+
+
+def register_view(request):
+    if not request.user.is_authenticated:
+        if request.method == 'POST':
+            form = UserCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                sweetify.success(request, 'signup successful',persistent='ok')
+                return redirect('/')
+        form = UserCreationForm()
+        context = {'form': form}
+        return render(request, 'accounts/signup.html',context)
+    else:
+       return redirect('/')
+
+
+
+
+
 
 
 def login_view(request):

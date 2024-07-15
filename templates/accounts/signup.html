@@ -2,24 +2,19 @@
 {% load static %}
 {% load widget_tweaks %}
 
-
-
-
-
 {% block title %}
-Login
+  register
 {% endblock title %}
 
 
 
-
 {% block content %}
-{% include "components/header.html" with title="Login" is_go_back=True %}
+  {% include "components/header.html" with title="Register" is_go_back=True %}
 
 
 <div class="flex justify-center mt-10">
   <div class="border border-slate-300 rounded-lg p-6 dark:bg-slate-50">
-    <form method="POST" autocomplete="off">
+    <form method="POST" action="{% url 'accounts:register' %}" autocomplete="off">
     {% csrf_token %}
     {% for field in form %} 
 
@@ -29,7 +24,7 @@ Login
         </div> 
 
     {% endfor %} 
-    <button type="submit" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded">Login</button>
+    <button type="submit" class="bg-cyan-500 hover:bg-cyan-700 text-white font-bold py-2 px-4 rounded">Sign up</button>
 </form>
 
 
@@ -43,6 +38,7 @@ Login
 
 
 
+
 {% block scripts %}
-<script src="{% static 'js/test.js' %}" defer></script>
+  <script src="{% static 'js/test.js' %}" defer></script>
 {% endblock scripts %}
