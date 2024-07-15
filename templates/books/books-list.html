@@ -16,7 +16,7 @@
 
 <!-- ascii upper letters -->
 {% for letter in letters %}
-    <a href="{% url 'books:char-books' char=letter %}" class="{% if letter == selected_letter %} underline {% endif%}">{{letter}}</a>
+    <a href="{% url 'books:char-books' char=letter %}" class="{% if letter == selected_letter %} underline {% endif%} bg-slate-400 rounded-xl p-3">{{letter}}</a>
 {% endfor %}
 
 
@@ -94,11 +94,11 @@
 {% if books %}
   
   {% for book in books %}
-  <a href="{{ book.get_absolute_url }}"> <li class="pt-4">{{book.title}}</li></a> 
+  <a href="{{ book.get_absolute_url }}"><li class="pt-6">{{book.title}}</li></a> 
   {% endfor %}
 
 {% else %}
-    <p>no matching book with {{selected_letter}}</p>
+    <p class="pt-10">no matching book with {{selected_letter}}</p>
 {% endif %}
 
 
