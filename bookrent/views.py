@@ -8,6 +8,11 @@ from books.models import *
 from customers.models import Customer
 from publishers.models import Publisher
 from rentals.status import STATUS_CHOICES
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+
+
+
 
 def change_mode(request):
     if 'is_dark_mode' in request.session:
@@ -19,13 +24,12 @@ def change_mode(request):
 
 
 
-class DashboardView(TemplateView):
+class DashboardView(LoginRequiredMixin,TemplateView):
     template_name = 'dashboard.html'
 
 
 
-
-
+@login_required
 def chart_data(request):
     data = []
     all_books = len(Book.objects.all())
