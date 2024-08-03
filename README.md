@@ -18,7 +18,7 @@ BookRent is a Django-based web application that allows users to rent books with 
 1. Clone the repository:
 
      ~~~bash
-     git clone <https://github.com/AisDisappeared/BOOKRENT.git>
+     git clone https://github.com/AisDisappeared/BOOKRENT.git
      ~~~
 
 2. Navigate to the project directory:
@@ -28,7 +28,11 @@ BookRent is a Django-based web application that allows users to rent books with 
      ~~~
 
 3. Create and activate a virtual environment:
-     python -m venv venv
+
+   ~~~bash
+   python -m venv venv
+   ~~~
+
    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
 4. Install the required dependencies:
