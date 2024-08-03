@@ -16,28 +16,43 @@ BookRent is a Django-based web application that allows users to rent books with 
 ## Installation
 
 1. Clone the repository:
-     git clone https://github.com/AisDisappeared/BOOKRENT.git
-   
+
+     ~~~bash
+     git clone <https://github.com/AisDisappeared/BOOKRENT.git>
+     ~~~
+
 2. Navigate to the project directory:
-     cd bookrent
-   
+
+     ~~~bash
+     cd BOOKRENT
+     ~~~
+
 3. Create and activate a virtual environment:
      python -m venv venv
    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-   
+
 4. Install the required dependencies:
+
+     ~~~bash
      pip install -r requirements.txt
-   
+     ~~~
+
 5. Install Tailwind CSS:
    Follow the instructions in the [django-tailwind documentation](https://django-tailwind.readthedocs.io/en/latest/installation.html) to set up Tailwind CSS.
 
 6. Apply migrations:
+
+     ~~~bash
      python manage.py migrate
-     
+     ~~~
+
 7. Run the development server:
+
+     ~~~bash
      python manage.py runserver
-   
-8. Visit http://127.0.0.1:8000/ in your browser.
+     ~~~
+
+8. Visit <http://127.0.0.1:8000/> in your browser.
 
 ## Usage
 
